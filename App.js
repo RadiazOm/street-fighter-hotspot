@@ -1,7 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import mapIcon from "./assets/icons/mapIcon.png"
+import listIcon from "./assets/icons/listIcon.png"
+import profileIcon from "./assets/icons/profileIcon.png"
+
 import MapPage from "./components/pages/MapPage";
 import ListPage from "./components/pages/ListPage";
 import ProfilePage from "./components/pages/ProfilePage";
@@ -13,9 +17,27 @@ export default function App() {
     <NavigationContainer>
       <StatusBar/>
       <Tab.Navigator>
-        <Tab.Screen name={"Map"} component={MapPage}/>
-        <Tab.Screen name={"List"} component={ListPage}/>
-        <Tab.Screen name={"Profile"} component={ProfilePage}/>
+        <Tab.Screen options={{
+            tabBarIcon: ({size, focused, color}) => {
+                return (
+                    <Image style={{width: size, height: size}} source={mapIcon}/>
+            )
+        }
+        }} name={"Map"} component={MapPage}/>
+        <Tab.Screen options={{
+            tabBarIcon: ({size, focused, color}) => {
+                return (
+                    <Image style={{width: size, height: size}} source={listIcon}/>
+                )
+            }
+        }} name={"List"} component={ListPage}/>
+        <Tab.Screen options={{
+            tabBarIcon: ({size, focused, color}) => {
+                return (
+                    <Image style={{width: size, height: size}} source={profileIcon}/>
+                )
+            }
+        }} name={"Profile"} component={ProfilePage}/>
       </Tab.Navigator>
     </NavigationContainer>
   );

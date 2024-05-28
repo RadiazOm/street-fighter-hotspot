@@ -1,9 +1,9 @@
 import {FlatList, Image, StyleSheet, Text, View} from "react-native";
 import ListItem from "./ListItem";
-import ryuImage from "../assets/img/ryu.png"
-import kenImage from "../assets/img/ken.png"
-import chunImage from "../assets/img/chun-li.png"
-import guileImage from "../assets/img/guile.png"
+import ryuImage from "../assets/characterImg/ryu.png"
+import kenImage from "../assets/characterImg/ken.png"
+import chunImage from "../assets/characterImg/chun-li.png"
+import guileImage from "../assets/characterImg/guile.png"
 
 
 const List = () => {
@@ -116,8 +116,7 @@ const List = () => {
 
     return(
         <View style={{
-            display: "flex",
-            alignItems: "center"
+
         }}>
             <FlatList data={data} renderItem={({item}) => <ListItem character={item.character} location={item.latitude + ' ' + item.longitude} image={item.image}/>}/>
         </View>
