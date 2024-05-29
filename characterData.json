@@ -8,8 +8,8 @@
   },
   {
     "character": "Ken",
-    "longitude": 4.4825,
-    "latitude": 51.9250,
+    "longitude": 4.484650,
+    "latitude": 51.917381,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/ken.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/kenIcon.png"
   },
@@ -92,8 +92,8 @@
   },
   {
     "character": "Luke",
-    "longitude": 4.4880,
-    "latitude": 51.9170,
+    "longitude": 4.4825,
+    "latitude": 51.9250,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/luke.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/lukeIcon.png"
   },
