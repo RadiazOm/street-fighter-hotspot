@@ -28,143 +28,9 @@ import IconButton from "../IconButton.js";
 
 
 
-const MapPage = () => {
+const MapPage = ({navigation}) => {
 
-    const data = [
-        {
-            "character": "Ryu",
-            "longitude": 4.47917,
-            "latitude": 51.9225,
-            "image": ryuIcon,
-            "description": "Wandering martial artist, master of the Hadouken."
-        },
-        {
-            "character": "Ken",
-            "longitude": 4.4825,
-            "latitude": 51.9250,
-            "image": kenIcon,
-            "description": "Fiery martial artist, Ryu's best friend."
-        },
-        {
-            "character": "Chun-Li",
-            "longitude": 4.4900,
-            "latitude": 51.9175,
-            "image": chunIcon,
-            "description": "Interpol officer with powerful kicks."
-        },
-        {
-            "character": "Guile",
-            "longitude": 4.4750,
-            "latitude": 51.9275,
-            "image": guileIcon,
-            "description": "U.S. Air Force major, master of Sonic Boom."
-        },
-        {
-            "character": "Blanka",
-            "longitude": 4.4850,
-            "latitude": 51.9200,
-            "image": blankaIcon,
-            "description": "Wild man from Brazil, uses electric attacks."
-        },
-        {
-            "character": "Zangief",
-            "longitude": 4.4800,
-            "latitude": 51.9150,
-            "image": zangiefIcon,
-            "description": "Russian wrestler, known as the Red Cyclone."
-        },
-        {
-            "character": "Dhalsim",
-            "longitude": 4.4950,
-            "latitude": 51.9230,
-            "image": dhalsimIcon,
-            "description": "Yoga master from India, stretches limbs."
-        },
-        {
-            "character": "E. Honda",
-            "longitude": 4.4875,
-            "latitude": 51.9210,
-            "image": hondaIcon,
-            "description": "Sumo wrestler aiming for global recognition."
-        },
-        {
-            "character": "Lily",
-            "longitude": 4.4780,
-            "latitude": 51.9185,
-            "image": lilyIcon,
-            "description": "New fighter inspired by T. Hawk."
-        },
-        {
-            "character": "JP",
-            "longitude": 4.4810,
-            "latitude": 51.9160,
-            "image": jpIcon,
-            "description": "Mysterious fighter with unique techniques."
-        },
-        {
-            "character": "Cammy",
-            "longitude": 4.4890,
-            "latitude": 51.9190,
-            "image": cammyIcon,
-            "description": "British special forces operative."
-        },
-        {
-            "character": "Marisa",
-            "longitude": 4.4760,
-            "latitude": 51.9220,
-            "image": marisaIcon,
-            "description": "Gladiator-inspired fighter with powerful attacks."
-        },
-        {
-            "character": "???",
-            "longitude": 4.4815,
-            "latitude": 51.9180,
-            "image": akumaIcon,
-            "description": "Powerful martial artist."
-        },
-        {
-            "character": "Luke",
-            "longitude": 4.4880,
-            "latitude": 51.9170,
-            "image": lukeIcon,
-            "description": "MMA-inspired fighter, ambitious and strong."
-        },
-        {
-            "character": "Kimberley",
-            "longitude": 4.4845,
-            "latitude": 51.9240,
-            "image": kimberleyIcon,
-            "description": "Vibrant ninja with modern techniques."
-        },
-        {
-            "character": "Manon",
-            "longitude": 4.4820,
-            "latitude": 51.9215,
-            "image": manonIcon,
-            "description": "Ballet dancer blending martial arts."
-        },
-        {
-            "character": "Jamie",
-            "longitude": 4.4775,
-            "latitude": 51.9195,
-            "image": jamieIcon,
-            "description": "Practitioner of drunken boxing."
-        },
-        {
-            "character": "Juri",
-            "longitude": 4.4860,
-            "latitude": 51.9255,
-            "image": juriIcon,
-            "description": "Thrill-seeking Taekwondo expert."
-        },
-        {
-            "character": "Dee Jay",
-            "longitude": 4.4805,
-            "latitude": 51.9185,
-            "image": deejayIcon,
-            "description": "Cheerful Jamaican kickboxer."
-        }
-    ]
+    const [characterData, setCharacterData] = useState([])
 
     const mapStyle = [
         {
@@ -238,27 +104,10 @@ const MapPage = () => {
         },
         {
             "featureType": "poi",
-            "elementType": "labels.text",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "poi",
             "elementType": "labels.text.fill",
             "stylers": [
                 {
                     "color": "#93817c"
-                }
-            ]
-        },
-        {
-            "featureType": "poi.business",
-            "stylers": [
-                {
-                    "visibility": "off"
                 }
             ]
         },
@@ -286,15 +135,6 @@ const MapPage = () => {
             "stylers": [
                 {
                     "color": "#f5f1e6"
-                }
-            ]
-        },
-        {
-            "featureType": "road",
-            "elementType": "labels.icon",
-            "stylers": [
-                {
-                    "visibility": "off"
                 }
             ]
         },
@@ -349,14 +189,6 @@ const MapPage = () => {
             "stylers": [
                 {
                     "color": "#806b63"
-                }
-            ]
-        },
-        {
-            "featureType": "transit",
-            "stylers": [
-                {
-                    "visibility": "off"
                 }
             ]
         },
@@ -430,6 +262,15 @@ const MapPage = () => {
     useEffect(() => {
         (async () => {
 
+            try {
+                const response = await fetch("https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/characterData.json")
+                const json = await response.json()
+                setCharacterData(json)
+            } catch (e) {
+                setErrorMsg('Could not get character data')
+            }
+
+
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 setErrorMsg('Permission to access location was denied');
@@ -462,7 +303,8 @@ const MapPage = () => {
                         coordinate={{latitude: character.latitude, longitude: character.longitude}}
                         title={character.character}
                         description={character.description}
-                        image={character.image}
+                        image={character.icon}
+                        onCalloutPress={() => {navigation.navigate("Character", {name: character.character, image: character.image, location: {latitude: character.latitude, longitude: character.longitude}})}}
                     />
                 ))}
                 <Circle center={location} radius={radius} strokeColor={'rgba(0, 0, 255, 0.8)'} fillColor={'rgba(0, 0, 255, 0.1)'}/>

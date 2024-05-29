@@ -1,17 +1,15 @@
 import {ScrollView, StatusBar, Text, View} from "react-native";
 import ListItem from "../ListItem";
 import List from "../List";
-import IconButton from "../IconButton";
-import myLocationIcon from "../../assets/icons/myLocationIcon.png"
 
 
 
-const ListPage = () => {
+
+const ListPage = ({navigation}) => {
 
     return(
         <View>
-            <IconButton image={myLocationIcon}/>
-            <List/>
+            <List navigation={navigation}/>
         </View>
     )
 }

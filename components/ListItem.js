@@ -1,20 +1,22 @@
-import {Image, StyleSheet, Text, View} from "react-native";
+import {Image, Pressable, StyleSheet, Text, View} from "react-native";
 
-const ListItem = ({character, location, image}) => {
+const ListItem = ({character, location, image, navigation}) => {
 
     return(
-        <View style={styles.box}>
-            <View>
-                <Image style={styles.image} source={image}></Image>
+        <Pressable onPress={() => {navigation.navigate('Character', {name: character, image: image, location: {latitude: location, longitude: location}})}}>
+            <View style={styles.box}>
+                <View>
+                    <Image style={styles.image} source={image}></Image>
+                </View>
+                <View style={{
+                    display: "flex",
+                    justifyContent: "center"
+                }}>
+                    <Text>{character}</Text>
+                    <Text>Location: {location}</Text>
+                </View>
             </View>
-            <View style={{
-                display: "flex",
-                justifyContent: "center"
-            }}>
-                <Text>{character}</Text>
-                <Text>Location: {location}</Text>
-            </View>
-        </View>
+        </Pressable>
     )
 }
 
