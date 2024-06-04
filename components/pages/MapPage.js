@@ -28,7 +28,7 @@ import IconButton from "../IconButton.js";
 
 
 
-const MapPage = ({navigation}) => {
+const MapPage = ({navigation, route}) => {
 
     const [characterData, setCharacterData] = useState([])
 
@@ -277,13 +277,24 @@ const MapPage = ({navigation}) => {
                 return;
             }
 
-            await Location.watchPositionAsync({accuracy: Accuracy.BestForNavigation}, (coords) => {
+            await Location.watchPositionAsync({accuracy: Accuracy.Balanced}, (coords) => {
                 setLocation({"longitude": coords.coords.longitude, "latitude": coords.coords.latitude})
                 setRadius(coords.coords.accuracy)
             });
 
         })();
     }, []);
+
+
+    if (route.params) {
+        console.log(route.params)
+        mapViewRef.current.animateToRegion({
+            latitude: route.params.latitude,
+            longitude: route.params.longitude,
+            latitudeDelta: 0.003,
+            longitudeDelta: 0.003,
+        }, 1000)
+    }
 
     return(
         <View style={styles.container}>
@@ -297,14 +308,14 @@ const MapPage = ({navigation}) => {
                  region={region}
                  customMapStyle={mapStyle}
             >
-                {data.map((character, index) => (
+                {characterData.map((character, index) => (
                     <Marker
                         key={index}
                         coordinate={{latitude: character.latitude, longitude: character.longitude}}
                         title={character.character}
-                        description={character.description}
+                        description={character.shortDescription}
                         image={character.icon}
-                        onCalloutPress={() => {navigation.navigate("Character", {name: character.character, image: character.image, location: {latitude: character.latitude, longitude: character.longitude}})}}
+                        onCalloutPress={() => {navigation.navigate("Character", {name: character.character, image: character.image, location: {latitude: character.latitude, longitude: character.longitude}, description: character.description, theme: character.theme})}}
                     />
                 ))}
                 <Circle center={location} radius={radius} strokeColor={'rgba(0, 0, 255, 0.8)'} fillColor={'rgba(0, 0, 255, 0.1)'}/>

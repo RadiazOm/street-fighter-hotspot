@@ -5,7 +5,7 @@ import MapPage from "../pages/MapPage";
 
 const MapStack = createStackNavigator()
 
-const MapStackScreen = () => {
+const MapStackScreen = ({route}) => {
 
     return (
         <MapStack.Navigator>

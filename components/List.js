@@ -19,130 +19,31 @@ import manonImage from "../assets/characterImg/manon.png"
 import jamieImage from "../assets/characterImg/jamie.png"
 import juriImage from "../assets/characterImg/juri.png"
 import deejayImage from "../assets/characterImg/deejay.png"
+import {useEffect, useState} from "react";
 
 
 
 const List = ({navigation}) => {
-    const data = [
-        {
-            "character": "Ryu",
-            "longitude": 4.47917,
-            "latitude": 51.9225,
-            "image": ryuImage
-        },
-        {
-            "character": "Ken",
-            "longitude": 4.4825,
-            "latitude": 51.9250,
-            "image": kenImage
-        },
-        {
-            "character": "Chun-Li",
-            "longitude": 4.4900,
-            "latitude": 51.9175,
-            "image": chunImage
-        },
-        {
-            "character": "Guile",
-            "longitude": 4.4750,
-            "latitude": 51.9275,
-            "image": guileImage
-        },
-        {
-            "character": "Blanka",
-            "longitude": 4.4850,
-            "latitude": 51.9200,
-            "image": blankaImage
-        },
-        {
-            "character": "Zangief",
-            "longitude": 4.4800,
-            "latitude": 51.9150,
-            "image": zangiefImage
-        },
-        {
-            "character": "Dhalsim",
-            "longitude": 4.4950,
-            "latitude": 51.9230,
-            "image": dhalsimImage
-        },
-        {
-            "character": "E. Honda",
-            "longitude": 4.4875,
-            "latitude": 51.9210,
-            "image": hondaImage
-        },
-        {
-            "character": "Lily",
-            "longitude": 4.4780,
-            "latitude": 51.9185,
-            "image": lilyImage
-        },
-        {
-            "character": "JP",
-            "longitude": 4.4810,
-            "latitude": 51.9160,
-            "image": jpImage
-        },
-        {
-            "character": "Cammy",
-            "longitude": 4.4890,
-            "latitude": 51.9190,
-            "image": cammyImage
-        },
-        {
-            "character": "Marisa",
-            "longitude": 4.4760,
-            "latitude": 51.9220,
-            "image": marisaImage
-        },
-        {
-            "character": "???",
-            "longitude": 4.4815,
-            "latitude": 51.9180,
-            "image": akumaImage
-        },
-        {
-            "character": "Luke",
-            "longitude": 4.4880,
-            "latitude": 51.9170,
-            "image": lukeImage
-        },
-        {
-            "character": "Kimberley",
-            "longitude": 4.4845,
-            "latitude": 51.9240,
-            "image": kimberleyImage
-        },
-        {
-            "character": "Manon",
-            "longitude": 4.4820,
-            "latitude": 51.9215,
-            "image": manonImage
-        },
-        {
-            "character": "Jamie",
-            "longitude": 4.4775,
-            "latitude": 51.9195,
-            "image": jamieImage
-        },
-        {
-            "character": "Juri",
-            "longitude": 4.4860,
-            "latitude": 51.9255,
-            "image": juriImage
-        },
-        {
-            "character": "Dee Jay",
-            "longitude": 4.4805,
-            "latitude": 51.9185,
-            "image": deejayImage
-        }
-    ]
+
+    const [characterData, setCharacterData] = useState([])
+
+
+    useEffect(() => {
+        (async () => {
+
+            try {
+                const response = await fetch("https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/characterData.json")
+                const json = await response.json()
+                setCharacterData(json)
+            } catch (e) {
+                console.log('could not get character data')
+            }
+        })()
+    })
 
     return(
         <View>
-            <FlatList data={data} renderItem={({item}) => <ListItem character={item.character} location={item.latitude + ' ' + item.longitude} image={item.image} navigation={navigation}/>}/>
+            <FlatList data={characterData} renderItem={({item}) => <ListItem character={item.character} location={{"longitude": item.longitude, "latitude": item.latitude}} image={item.image} theme={item.theme} description={item.description} navigation={navigation}/>}/>
         </View>
     )
 }

@@ -11,10 +11,16 @@ import ListPage from "./components/pages/ListPage";
 import ProfilePage from "./components/pages/ProfilePage";
 import MapStackScreen from "./components/stacks/MapStackScreen";
 import ListStackScreen from "./components/stacks/ListStackScreen";
+import {useFonts} from "expo-font";
 
 const Tab = createBottomTabNavigator()
 
 export default function App() {
+
+    const [fontsLoaded, fontError] = useFonts({
+        "Renegade-Pursuit": require('./assets/font/RenegadePursuit.ttf')
+    })
+
   return (
       <NavigationContainer>
         <StatusBar/>
