@@ -15,7 +15,7 @@ const CharacterPage = ({navigation, route}) => {
             <Text style={{fontFamily: 'Renegade-Pursuit', textAlign: 'center', marginTop: 100, fontSize: 40}}>{name}</Text>
             <Text style={{marginHorizontal: 50}}>{description}</Text>
             <Text style={{fontWeight: 'bold', textAlign: 'center', marginTop: 10, fontSize: 20}}>Location</Text>
-            <Pressable onPress={() => {navigation.navigate('Map', location)}} style={{backgroundColor: theme, marginTop: 20, marginHorizontal: 50, height: 50, display: 'flex', justifyContent: 'center', borderRadius: 10}}>
+            <Pressable onPress={() => {navigation.navigate('Map', location)}} style={{backgroundColor: '#eeeeee', marginTop: 20, marginHorizontal: 50, height: 50, display: 'flex', justifyContent: 'center', borderRadius: 10, borderColor: theme, borderWidth: 3}}>
                 <Text style={{textAlign: 'center'}}>{location.latitude + ', ' + location.longitude}</Text>
             </Pressable>
         </View>
