@@ -5,7 +5,9 @@
     "latitude": 51.9225,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/ryu.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/ryuIcon.png",
-    "description": "Wandering martial artist, master of the Hadouken."
+    "theme": "#876F6F",
+    "shortDescription": "Wandering martial artist, master of the Hadouken.",
+    "description": "Ever training, this martial artist seeks true strength. Well-mannered and sincere, Ryu travels the globe in search of worthy opponents. Having overcome the Satsui no Hado, he now seeks yet greater heights.",
   },
   {
     "character": "Ken",
@@ -13,7 +15,9 @@
     "latitude": 51.917381,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/ken.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/kenIcon.png",
-    "description": "Fiery martial artist, Ryu's best friend."
+    "theme": "#9D4B01",
+    "shortDescription": "Fiery martial artist, Ryu's best friend.",
+    "description": "Former US National Fighting Champ, and ex-VP of the Masters Foundation. Accusations of orchestrating a criminal plot have forced Ken to abandon his family and business and go into hiding."
   },
   {
     "character": "Chun-Li",
@@ -21,7 +25,9 @@
     "latitude": 51.9175,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/chun-li.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/chunIcon.png",
-    "description": "Interpol officer with powerful kicks."
+    "theme": "#A0CAF5",
+    "shortDescription": "Interpol officer with powerful kicks.",
+    "description": "A former high-kicking ICPO agent, Chun-Li looks after Li-Fen, a victim of the Black Moon Incident. With Shadaloo sundered, she now runs kung fu classes, and has become a well-loved member of the local community."
   },
   {
     "character": "Guile",
@@ -29,7 +35,9 @@
     "latitude": 51.9275,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/guile.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/guileIcon.png",
-    "description": "U.S. Air Force major, master of Sonic Boom."
+    "theme": "#607771",
+    "shortDescription": "U.S. Air Force major, master of Sonic Boom.",
+    "description": "A US Air Force pilot who fights for his country, Guile succeeded in dismantling Shadaloo and avenging his friend Charlie. He enjoys living the family man life, but new battlefields await him."
   },
   {
     "character": "Blanka",
@@ -37,7 +45,9 @@
     "latitude": 51.9200,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/blanka.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/blankaIcon.png",
-    "description": "Wild man from Brazil, uses electric attacks."
+    "theme": "#00475E",
+    "shortDescription": "Wild man from Brazil, uses electric attacks.",
+    "description": "A kindhearted defender of nature, Blanka has become an adventure tour guide, confident his intimate knowledge of the jungle will serve as a springboard to fame—and a comfortable life for his beloved mother.\n\n"
   },
   {
     "character": "Zangief",
@@ -45,7 +55,9 @@
     "latitude": 51.9150,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/zangief.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/zangiefIcon.png",
-    "description": "Russian wrestler, known as the Red Cyclone."
+    "theme": "#484745",
+    "shortDescription": "Russian wrestler, known as the Red Cyclone.",
+    "description": "A colossal wrestler nicknamed the Red Cyclone. Zangief is dedicated to physical improvement and instructing his students.\n\n"
   },
   {
     "character": "Dhalsim",
@@ -53,7 +65,9 @@
     "latitude": 51.9230,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/dhalsim.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/dhalsimIcon.png",
-    "description": "Yoga master from India, stretches limbs."
+    "theme": "#A47102",
+    "shortDescription": "Yoga master from India, stretches limbs.",
+    "description": "A monk and yoga master from India who has served as a guide for countless suffering souls. Prefers to avoid conflict when possible, but his innate hatred of evil compels him to dispense stern justice."
   },
   {
     "character": "E. Honda",
@@ -61,7 +75,9 @@
     "latitude": 51.9210,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/honda.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/hondaIcon.png",
-    "description": "Sumo wrestler aiming for global recognition."
+    "theme": "#477790",
+    "shortDescription": "Sumo wrestler aiming for global recognition.",
+    "description": "A sumo wrestler looking to bring the sport worldwide, E. Honda has the skills of a yokozuna, but his constant globetrotting has prevented his promotion. Also an expert chef renowned for mouthwatering chanko stew.\n\n"
   },
   {
     "character": "Lily",
@@ -69,7 +85,9 @@
     "latitude": 51.9185,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/lily.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/lilyIcon.png",
-    "description": "New fighter inspired by T. Hawk."
+    "theme": "#A6DFAB",
+    "shortDescription": "New fighter inspired by T. Hawk.",
+    "description": "A descendant of the Thunderfoot tribe, Lily speaks with the spirits of nature, trusting in their guidance as she travels the globe. Don't judge a book by its cover—her small stature conceals truly titanic power.\n\n"
   },
   {
     "character": "JP",
@@ -77,7 +95,9 @@
     "latitude": 51.9160,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/jp.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/jpIcon.png",
-    "description": "Mysterious fighter with unique techniques."
+    "theme": "#AD0E2E",
+    "shortDescription": "Mysterious fighter with unique techniques.",
+    "description": "Head of an international NGO responsible for many successful investment projects, and the man behind Nayshall's present prosperity. Has a beloved cat named Cybele.\n\n"
   },
   {
     "character": "Cammy",
@@ -85,7 +105,9 @@
     "latitude": 51.9190,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/cammy.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/cammyIcon.png",
-    "description": "British special forces operative."
+    "theme": "#303D5A",
+    "shortDescription": "British special forces operative.",
+    "description": "Member of British special forces unit Delta Red. Distinguished herself in the operation against Shadaloo, with which she shares a fated connection. Hyper-competent but somewhat moody. Currently working at HQ.\n\n"
   },
   {
     "character": "Marisa",
@@ -93,7 +115,9 @@
     "latitude": 51.9220,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/marisa.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/marisaIcon.png",
-    "description": "Gladiator-inspired fighter with powerful attacks."
+    "theme": "#724F28",
+    "shortDescription": "Gladiator-inspired fighter with powerful attacks.",
+    "description": "An up-and-coming jewelry designer from Italy who claims ancestry to ancient Greek warriors. As a child, she was inspired by a vision of the Colosseum in its prime. Today, she seeks glory with a smile—and an eye for beauty.\n\n"
   },
   {
     "character": "???",
@@ -101,6 +125,8 @@
     "latitude": 51.9180,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/akuma.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/akumaIcon.png",
+    "theme": "#EDEDED",
+    "shortDescription": "Powerful martial artist",
     "description": "Powerful martial artist"
   },
   {
@@ -109,7 +135,9 @@
     "latitude": 51.9250,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/luke.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/lukeIcon.png",
-    "description": "MMA-inspired fighter, ambitious and strong."
+    "theme": "#013DCD",
+    "shortDescription": "MMA-inspired fighter, ambitious and strong.",
+    "description": "A contractor for a PMC, Luke uses his elite military background to teach mixed martial arts. His days off are spent eating junk food, playing video games, and fighting, but make no mistake—Luke plays to win.\n\n"
   },
   {
     "character": "Kimberley",
@@ -117,7 +145,9 @@
     "latitude": 51.9240,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/kimberley.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/kimberleyIcon.png",
-    "description": "Vibrant ninja with modern techniques."
+    "theme": "#EA596A",
+    "shortDescription": "Vibrant ninja with modern techniques.",
+    "description": "Uninvited student to Guy, the 39th successor to Bushinryu. Kimberly had an ordinary upbringing, but she's a genuine prodigy who graduated college early...and now wants to be a ninja. Loves '80s pop culture.\n\n"
   },
   {
     "character": "Manon",
@@ -125,7 +155,9 @@
     "latitude": 51.9215,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/manon.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/manonIcon.png",
-    "description": "Ballet dancer blending martial arts."
+    "theme": "#B299C3",
+    "shortDescription": "Ballet dancer blending martial arts.",
+    "description": "A super model and world champion judoka, Manon is an idealist, forever seeking self-improvement in the pursuit of beauty. She struts the catwalk of street fighting to become the world's strongest model.\n\n"
   },
   {
     "character": "Jamie",
@@ -133,7 +165,9 @@
     "latitude": 51.9195,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/jamie.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/jamieIcon.png",
-    "description": "Practitioner of drunken boxing."
+    "theme": "#4E0C01",
+    "shortDescription": "Practitioner of drunken boxing.",
+    "description": "This self-styled Chinatown peacekeeper aspires to the example set by Yun and Yang, the Twin Dragons. An expert dancer, Jamie places justice and friendship above all else, defending his town with martial skill.\n\n"
   },
   {
     "character": "Juri",
@@ -141,7 +175,9 @@
     "latitude": 51.9255,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/juri.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/juriIcon.png",
-    "description": "Thrill-seeking Taekwondo expert."
+    "theme": "#510E2B",
+    "shortDescription": "Thrill-seeking Taekwondo expert.",
+    "description": "This sadistic thrillseeker enjoys the strife and suffering of others, taking immense joy in obliterating her foes.\nWithout revenge against M. Bison as a motivator, she whiles away her time in a gloomy haze."
   },
   {
     "character": "Dee Jay",
@@ -149,6 +185,8 @@
     "latitude": 51.9185,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/deejay.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/deejayIcon.png",
-    "description": "Cheerful Jamaican kickboxer."
+    "theme": "#C97106",
+    "shortDescription": "Cheerful Jamaican kickboxer.",
+    "description": "A globally popular dance music superstar, Dee Jay is always ready to have a good time. With a burning love for music and fighting, this Jamaican sensation drives audiences wild with hot new songs and stylish moves.\n\n"
   }
 ]
