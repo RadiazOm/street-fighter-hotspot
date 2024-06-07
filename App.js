@@ -12,6 +12,8 @@ import ProfilePage from "./components/pages/ProfilePage";
 import MapStackScreen from "./components/stacks/MapStackScreen";
 import ListStackScreen from "./components/stacks/ListStackScreen";
 import {useFonts} from "expo-font";
+import {useEffect, useState} from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator()
 
@@ -21,10 +23,20 @@ export default function App() {
         "Renegade-Pursuit": require('./assets/font/RenegadePursuit.ttf')
     })
 
+    // TODO: use the context api of react so that the theme dynamically changes when u press the theme button
+    const [darkMode, setDarkMode] = useState(false)
+
+    useEffect(() => {
+        (async () => {
+            const dark = JSON.parse(await AsyncStorage.getItem('dark-mode'))
+            setDarkMode(dark)
+        })()
+    }, []);
+
   return (
       <NavigationContainer>
         <StatusBar/>
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={{tabBarActiveBackgroundColor: darkMode ? '#000000' : '#ffffff', tabBarInactiveBackgroundColor: darkMode ? '#000000' : '#ffffff', tabBarActiveTintColor: darkMode ? '#ffffff' : '#000000', tabBarInActiveTintColor: darkMode ? '#ffffff' : '#000000', headerTintColor: darkMode ? '#ffffff' : '#000000', headerStyle: {backgroundColor: darkMode ? '#000000' : '#ffffff'} }}>
             <Tab.Screen options={{
             tabBarIcon: ({size, focused, color}) => {
                 return (
