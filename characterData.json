@@ -125,7 +125,7 @@
     "latitude": 51.9180,
     "image": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/akuma.png",
     "icon": "https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/assets/characterImg/akumaIcon.png",
-    "theme": "##0B0B0B",
+    "theme": "#FE0004",
     "shortDescription": "Powerful martial artist",
     "description": "Powerful martial artist"
   },
