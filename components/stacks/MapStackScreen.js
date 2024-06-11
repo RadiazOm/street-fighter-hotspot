@@ -5,11 +5,13 @@ import MapPage from "../pages/MapPage";
 
 const MapStack = createStackNavigator()
 
-const MapStackScreen = ({route}) => {
+const MapStackScreen = ({route, tracking}) => {
 
     return (
         <MapStack.Navigator>
-            <MapStack.Screen name={"Map"} component={MapPage}/>
+            <MapStack.Screen name={"Map"}>
+                {(props) => <MapPage {...props} tracking={tracking}/>}
+            </MapStack.Screen>
             <MapStack.Screen name={"Character"} component={CharacterPage}/>
         </MapStack.Navigator>
     )

@@ -20,6 +20,7 @@ import jamieImage from "../assets/characterImg/jamie.png"
 import juriImage from "../assets/characterImg/juri.png"
 import deejayImage from "../assets/characterImg/deejay.png"
 import {useEffect, useState} from "react";
+import {useTheme} from "@react-navigation/native";
 
 
 
@@ -27,6 +28,7 @@ const List = ({navigation}) => {
 
     const [characterData, setCharacterData] = useState([])
 
+    const { colors } = useTheme()
 
     useEffect(() => {
         (async () => {
@@ -42,7 +44,7 @@ const List = ({navigation}) => {
     })
 
     return(
-        <View>
+        <View style={{backgroundColor: colors.background}}>
             <FlatList data={characterData} renderItem={({item}) => <ListItem character={item.character} location={{"longitude": item.longitude, "latitude": item.latitude}} image={item.image} theme={item.theme} description={item.description} navigation={navigation}/>}/>
         </View>
     )

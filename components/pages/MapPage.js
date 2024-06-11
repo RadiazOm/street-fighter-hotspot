@@ -5,34 +5,16 @@ import MapView from "react-native-maps";
 import * as Location from 'expo-location'
 import {Accuracy} from "expo-location";
 import myLocationIcon from "../../assets/icons/myLocationIcon.png"
-import ryuIcon from "../../assets/characterImg/ryuIcon.png";
-import kenIcon from "../../assets/characterImg/kenIcon.png";
-import chunIcon from "../../assets/characterImg/chunIcon.png";
-import guileIcon from "../../assets/characterImg/guileIcon.png";
-import blankaIcon from "../../assets/characterImg/blankaIcon.png";
-import zangiefIcon from "../../assets/characterImg/zangiefIcon.png";
-import dhalsimIcon from "../../assets/characterImg/dhalsimIcon.png";
-import hondaIcon from "../../assets/characterImg/hondaIcon.png";
-import lilyIcon from "../../assets/characterImg/lilyIcon.png";
-import jpIcon from "../../assets/characterImg/jpIcon.png";
-import cammyIcon from "../../assets/characterImg/cammyIcon.png";
-import marisaIcon from "../../assets/characterImg/marisaIcon.png";
-import akumaIcon from "../../assets/characterImg/akumaIcon.png";
-import lukeIcon from "../../assets/characterImg/lukeIcon.png";
-import kimberleyIcon from "../../assets/characterImg/kimberleyIcon.png";
-import manonIcon from "../../assets/characterImg/manonIcon.png";
-import jamieIcon from "../../assets/characterImg/jamieIcon.png";
-import juriIcon from "../../assets/characterImg/juriIcon.png";
-import deejayIcon from "../../assets/characterImg/deejayIcon.png";
 import IconButton from "../IconButton.js";
+import {useTheme} from "@react-navigation/native";
 
 
 
-const MapPage = ({navigation, route}) => {
+const MapPage = ({navigation, route, tracking}) => {
 
     const [characterData, setCharacterData] = useState([])
 
-    const mapStyle = [
+    const lightMapStyle = [
         {
             "elementType": "geometry",
             "stylers": [
@@ -248,16 +230,194 @@ const MapPage = ({navigation, route}) => {
         }
     ]
 
+    const darkMapStyle = [
+        {
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#242f3e"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#746855"
+                }
+            ]
+        },
+        {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+                {
+                    "color": "#242f3e"
+                }
+            ]
+        },
+        {
+            "featureType": "administrative.locality",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#d59563"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#d59563"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#263c3f"
+                }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#6b9a76"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#38414e"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "color": "#212a37"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#9ca5b3"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#746855"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [
+                {
+                    "color": "#1f2835"
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#f3d19c"
+                }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#2f3948"
+                }
+            ]
+        },
+        {
+            "featureType": "transit.station",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#d59563"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+                {
+                    "color": "#17263c"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#515c6d"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+                {
+                    "color": "#17263c"
+                }
+            ]
+        }
+    ]
+
+    const { colors, dark } = useTheme()
     const mapViewRef = useRef(null)
-    const [location, setLocation] = useState({"longitude": 4.484650, "latitude": 51.917381});
+    const [location, setLocation] = useState(null);
     const [radius, setRadius] = useState(10)
     const [region, setRegion] = useState(new AnimatedRegion({
-        latitude: location.latitude,
-        longitude: location.longitude,
+        longitude: 4.484650,
+        latitude: 51.917381,
         latitudeDelta: 0.0020,
         longitudeDelta: 0.0020
     }))
     const [errorMsg, setErrorMsg] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted' || !tracking) {
+                setErrorMsg('Permission to access location was denied');
+                setLocation(null)
+            } else {
+                await Location.watchPositionAsync({accuracy: Accuracy.Balanced}, (coords) => {
+                    setLocation({"longitude": coords.coords.longitude, "latitude": coords.coords.latitude})
+                    setRadius(coords.coords.accuracy)
+                });
+            }
+        })()
+    }, [tracking]);
 
     useEffect(() => {
         (async () => {
@@ -270,17 +430,6 @@ const MapPage = ({navigation, route}) => {
                 setErrorMsg('Could not get character data')
             }
 
-
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
-            }
-
-            await Location.watchPositionAsync({accuracy: Accuracy.Balanced}, (coords) => {
-                setLocation({"longitude": coords.coords.longitude, "latitude": coords.coords.latitude})
-                setRadius(coords.coords.accuracy)
-            });
 
         })();
     }, []);
@@ -300,13 +449,13 @@ const MapPage = ({navigation, route}) => {
         <View style={styles.container}>
             <MapView ref={mapViewRef} style={styles.map}
                  initialRegion={{
-                    latitude: location.latitude,
-                    longitude: location.longitude,
-                    latitudeDelta: 0.0020,
-                    longitudeDelta: 0.0020,
+                     longitude: 4.484650,
+                     latitude: 51.917381,
+                     latitudeDelta: 0.0020,
+                     longitudeDelta: 0.0020
                  }}
                  region={region}
-                 customMapStyle={mapStyle}
+                 customMapStyle={dark ? darkMapStyle : lightMapStyle}
             >
                 {characterData.map((character, index) => (
                     <Marker
@@ -318,16 +467,21 @@ const MapPage = ({navigation, route}) => {
                         onCalloutPress={() => {navigation.navigate("Character", {name: character.character, image: character.image, location: {latitude: character.latitude, longitude: character.longitude}, description: character.description, theme: character.theme})}}
                     />
                 ))}
-                <Circle center={location} radius={radius} strokeColor={'rgba(0, 0, 255, 0.8)'} fillColor={'rgba(0, 0, 255, 0.1)'}/>
-                <Circle center={location} radius={1} strokeColor={'rgba(255, 255, 255, 1)'} fillColor={'rgba(0, 100, 230, 1)'}/>
+                {location ? <Circle center={location} radius={radius} strokeColor={'rgba(0, 0, 255, 0.8)'} fillColor={'rgba(0, 0, 255, 0.1)'}/> : null}
+                {location ? <Circle center={location} radius={1} strokeColor={'rgba(255, 255, 255, 1)'} fillColor={'rgba(0, 100, 230, 1)'}/> : null}
             </MapView>
-            <IconButton style={{position: "absolute", bottom: 10, right: 10}} image={myLocationIcon} onPress={() => {
+            <IconButton style={{position: "absolute", bottom: 20, right: 20}} image={myLocationIcon} onPress={() => {
+                if (location) {
+
                 mapViewRef.current.animateToRegion({
                     latitude: location.latitude,
                     longitude: location.longitude,
                     latitudeDelta: radius / 10000,
                     longitudeDelta: radius / 10000,
-                }, 1000)}}/>
+                }, 1000)
+                } else {
+                    alert("Location permision is denied")
+                }}}/>
         </View>
     )
 }

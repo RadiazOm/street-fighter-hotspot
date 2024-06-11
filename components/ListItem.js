@@ -1,42 +1,26 @@
 import {Image, Pressable, StyleSheet, Text, View} from "react-native";
+import {useTheme} from "@react-navigation/native";
 
 const ListItem = ({character, location, image, theme, description, navigation}) => {
 
+    const { colors } = useTheme()
+
     return(
         <Pressable onPress={() => {navigation.navigate('Character', {name: character, image: image, location: location, theme: theme, description: description})}}>
-            <View style={styles.box}>
+            <View style={{ display: "flex", margin: 10, flexDirection: "row", width: '90%', marginHorizontal: 20, padding: 10, backgroundColor: colors.card, borderRadius: 10}}>
                 <View>
-                    <Image style={styles.image} source={{ uri: image }}></Image>
+                    <Image style={{ height: 100,  width: 100, resizeMode: "contain" }} source={{ uri: image }}></Image>
                 </View>
                 <View style={{
                     display: "flex",
                     justifyContent: "center"
                 }}>
-                    <Text>{character}</Text>
-                    <Text>Location: {location.longitude + ' ' + location.latitude}</Text>
+                    <Text style={{color: colors.text}}>{character}</Text>
+                    <Text style={{color: colors.text}}>Location: {location.longitude + ' ' + location.latitude}</Text>
                 </View>
             </View>
         </Pressable>
     )
 }
-
-
-const styles = StyleSheet.create({
-    box: {
-        display: "flex",
-        margin: 10,
-        flexDirection: "row",
-        width: '90%',
-        marginHorizontal: 20,
-        padding: 10,
-        backgroundColor: '#ffffff',
-        borderRadius: 10
-    },
-    image: {
-        height: 100,
-        width: 100,
-        resizeMode: "contain"
-    }
-});
 
 export default ListItem
