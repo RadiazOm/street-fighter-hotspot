@@ -1,5 +1,5 @@
 {
-  "name": "hotspotapp",
+  "name": "fighter-finder",
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {
