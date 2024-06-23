@@ -1,48 +1,51 @@
-import {Image, StatusBar, Switch, Text, View} from "react-native";
+import { Image, Switch, Text, View } from "react-native";
 import profilePlaceholder from "../../assets/icons/profilePlaceholder.png"
-import {useContext, useEffect, useState} from "react";
-import * as Location from "expo-location";
-import { Linking } from "react-native";
+import { useContext, useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {DefaultTheme, useTheme} from "@react-navigation/native";
-import {ThemeContext} from "../contexts/ThemeContext"
+import { useTheme } from "@react-navigation/native";
+import { ThemeContext } from "../contexts/ThemeContext"
 
 
 
-const ProfilePage = ({navigation, setTheme, setLocTracking}) => {
+const ProfilePage = ({ setTheme, setLocTracking }) => {
 
+    // get theme colors
     const { colors } = useTheme()
 
+    // get darkmode object and lightmode object
     const themes = useContext(ThemeContext)
 
+    // state variables for settings
     const [tracking, setTracking] = useState(false)
-    const [notif, setNotif] = useState(false)
     const [dark, setDark] = useState(false)
 
+    // get settings from asyncstorage
     useEffect(() => {
         (async () => {
             const darkMode = JSON.parse(await AsyncStorage.getItem('dark-mode'))
-            const tracking = JSON.parse(await  AsyncStorage.getItem('tracking'))
+            const tracking = JSON.parse(await AsyncStorage.getItem('tracking'))
 
             if (typeof tracking !== "undefined") {
                 setTracking(tracking)
             }
 
             if (typeof dark !== "undefined") {
-                console.log('setting dark')
                 setDark(darkMode)
             }
         })()
     }, []);
 
+    // if darkmode is changed, change everywhere else (theme is a state variable in app.js)
     useEffect(() => {
         setTheme(dark ? themes.dark : themes.light)
     }, [dark]);
 
+    // same thing as darkmode
     useEffect(() => {
         setLocTracking(tracking)
     }, [tracking]);
 
+    // when clicked on the allow tracking button, change asyncstorage and state variable
     const toggleTracking = async () => {
         try {
             await AsyncStorage.setItem('tracking', JSON.stringify(!tracking))
@@ -52,22 +55,17 @@ const ProfilePage = ({navigation, setTheme, setLocTracking}) => {
         setTracking(prev => !prev)
     }
 
-    const toggleNotif = () => {
-        setNotif(prev => !prev)
-    }
-
+    // same thing as above but for dark mode
     const toggleDark = async () => {
         try {
             await AsyncStorage.setItem('dark-mode', JSON.stringify(!dark))
         } catch (e) {
             alert(e)
         }
-        console.log('setting dark')
         setDark(prev => !prev)
     }
 
-
-
+    // your profile view
     return (
         <View style={{backgroundColor: colors.background, height: '100%'}}>
             <View style={{backgroundColor: 'blue', height: 250}}/>
@@ -93,13 +91,6 @@ const ProfilePage = ({navigation, setTheme, setLocTracking}) => {
                     <Switch
                         onValueChange={toggleTracking}
                         value={tracking}
-                    />
-                </View>
-                <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <Text style={{color: colors.text}}>Send notifications</Text>
-                    <Switch
-                        onValueChange={toggleNotif}
-                        value={notif}
                     />
                 </View>
                 <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>

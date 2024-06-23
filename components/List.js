@@ -1,56 +1,34 @@
-import {FlatList, Image, StyleSheet, Text, View} from "react-native";
+import {FlatList, StyleSheet, View} from "react-native";
 import ListItem from "./ListItem";
-import ryuImage from "../assets/characterImg/ryu.png"
-import kenImage from "../assets/characterImg/ken.png"
-import chunImage from "../assets/characterImg/chun-li.png"
-import guileImage from "../assets/characterImg/guile.png"
-import blankaImage from "../assets/characterImg/blanka.png"
-import zangiefImage from "../assets/characterImg/zangief.png"
-import dhalsimImage from "../assets/characterImg/dhalsim.png"
-import hondaImage from "../assets/characterImg/honda.png"
-import lilyImage from "../assets/characterImg/lily.png"
-import jpImage from "../assets/characterImg/jp.png"
-import cammyImage from "../assets/characterImg/cammy.png"
-import marisaImage from "../assets/characterImg/marisa.png"
-import akumaImage from "../assets/characterImg/akuma.png"
-import lukeImage from "../assets/characterImg/luke.png"
-import kimberleyImage from "../assets/characterImg/kimberley.png"
-import manonImage from "../assets/characterImg/manon.png"
-import jamieImage from "../assets/characterImg/jamie.png"
-import juriImage from "../assets/characterImg/juri.png"
-import deejayImage from "../assets/characterImg/deejay.png"
-import {useEffect, useState} from "react";
-import {useTheme} from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { useTheme } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
 
 const List = ({navigation}) => {
 
+    // State variable for the characterData we will fetch
     const [characterData, setCharacterData] = useState([])
 
+    // get current Theme
     const { colors } = useTheme()
 
+    // Get characterData content from fetch
     useEffect(() => {
         (async () => {
 
             try {
                 const response = await fetch("https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/characterData.json")
                 const json = await response.json()
-                const favoritedList = await orderList(json)
-                setCharacterData(favoritedList)
+                const favoritesList = await orderList(json)
+                setCharacterData(favoritesList)
             } catch (e) {
                 console.log('could not get character data')
             }
         })()
     }, [])
 
-    useEffect(() => {
-        if (characterData.length !== 0) {
-            console.log("listening for characterdata changes: " + characterData[0].character)
-        }
-    }, [characterData]);
 
+    // order list Favorites on top. not Favorites on bottom
     const orderList = async (list) => {
         let mutatedArray = list
         for (const character of mutatedArray) {
@@ -62,12 +40,14 @@ const List = ({navigation}) => {
         return mutatedArray
     }
 
+
+    // When u click on a favorite button, reorder the list
     const updateList = async () => {
-        const favoritedList = await orderList(characterData)
-        console.log(favoritedList[0].character)
-        setCharacterData([...favoritedList])
+        const favoritesList = await orderList(characterData)
+        setCharacterData([...favoritesList])
     }
 
+    // List view
     return(
         <View style={{backgroundColor: colors.background}}>
             <FlatList data={characterData} renderItem={({item}) =>
@@ -84,22 +64,5 @@ const List = ({navigation}) => {
         </View>
     )
 }
-
-
-const styles = StyleSheet.create({
-    box: {
-        display: "flex",
-        flexDirection: "row",
-        width: '90%',
-        padding: 10,
-        backgroundColor: '#ffffff',
-        borderRadius: 10
-    },
-    image: {
-        height: 100,
-        width: 100,
-        resizeMode: "contain"
-    }
-});
 
 export default List

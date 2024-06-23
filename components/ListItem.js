@@ -6,10 +6,13 @@ import {useEffect, useState} from "react";
 
 const ListItem = ({character, location, image, theme, description, navigation, updateList, characterData}) => {
 
+    // get theme colors
     const { colors, dark } = useTheme()
 
+    // state variable for favorite tracking, default false (no one has favorites right off the bat :) )
     const [favorite, setFavorite] = useState(false)
 
+    // check if they do have favorites stored
     useEffect(() => {
         (async () => {
 
@@ -17,23 +20,23 @@ const ListItem = ({character, location, image, theme, description, navigation, u
                 let fav = JSON.parse(await AsyncStorage.getItem(character))
 
                 if (typeof fav !== "undefined") {
-                    console.log(character + " = " + fav)
                     setFavorite(fav)
                 }
             } catch (e) {
-                console.log("me no likey asyncstorage")
+                console.log("Could not get favorite")
             }
         })()
 
     }, [characterData]);
 
+    // when u click the button, store favorite in storage and update list to show ur favorite at the top
     const setToggleFavorite = async () => {
-        console.log(character + " = " + !favorite)
         await AsyncStorage.setItem(character, JSON.stringify(!favorite))
         setFavorite(prev => !prev)
         updateList()
     }
 
+    // listItem view
     return(
         <Pressable onPress={() => {navigation.navigate('Character', {name: character, image: image, location: location, theme: theme, description: description})}}>
             <View style={{ display: "flex", margin: 10, flexDirection: "row", width: '90%', marginHorizontal: 20, padding: 10, backgroundColor: colors.card, borderRadius: 10}}>

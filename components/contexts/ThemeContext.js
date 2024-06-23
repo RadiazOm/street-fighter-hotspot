@@ -11,5 +11,4 @@ const darkMode = {
     },
 };
 
-
 export const ThemeContext = createContext({dark: darkMode, light: DefaultTheme})

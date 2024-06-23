@@ -1,27 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, useColorScheme } from 'react-native';
+import { useColorScheme } from 'react-native';
 import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import mapIcon from "./assets/icons/mapIcon.png"
-import listIcon from "./assets/icons/listIcon.png"
-import profileIcon from "./assets/icons/profileIcon.png"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfilePage from "./components/pages/ProfilePage";
 import MapStackScreen from "./components/stacks/MapStackScreen";
 import ListStackScreen from "./components/stacks/ListStackScreen";
-import {useFonts} from "expo-font";
-import {createContext, useContext, useEffect, useReducer, useState} from "react";
+import { useFonts } from "expo-font";
+import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator()
 
+
 export default function App() {
 
-    const [fontsLoaded, fontError] = useFonts({
+    // Loading the font
+    useFonts({
         "Renegade-Pursuit": require('./assets/font/RenegadePursuit.ttf')
     })
 
+    // Darkmode color theme
     const darkMode = {
         ...DarkTheme,
         colors: {
@@ -31,13 +31,17 @@ export default function App() {
         },
     };
 
+    // useState variable for which theme u are using
     const [theme, setTheme] = useState(useColorScheme() ? darkMode : DefaultTheme)
+
+    // setting variable to see if u want location tracking or not
     const [locationTracking, setLocationtracking] = useState(false)
 
+    // get the necessary values from asyncstorage to apply to our state variables
     useEffect(() => {
         (async () => {
             const dark = JSON.parse(await AsyncStorage.getItem('dark-mode'))
-            const tracking = JSON.parse(await  AsyncStorage.getItem('tracking'))
+            const tracking = JSON.parse(await AsyncStorage.getItem('tracking'))
 
             if (typeof tracking !== "undefined") {
                 setLocationtracking(tracking)
@@ -49,26 +53,30 @@ export default function App() {
         })()
     }, []);
 
+    // main navigation container (bottom tabs)
   return (
       <NavigationContainer theme={theme}>
         <StatusBar/>
         <Tab.Navigator>
             <Tab.Screen options={{
-            tabBarIcon: ({size, focused, color}) => {
+            tabBarIcon: () => {
                 return (
                     <FontAwesome name="map-marker" size={24} color={theme.dark ? 'white' : 'black'} />
-            )
-        }, headerShown: false, title: "Map"}} name={"MapStack"}>
+                )
+                // these variables are here because of the second stack we have, otherwise we would have double headers
+            }, headerShown: false, title: "Map"}} name={"MapStack"}>
                 {(props) => <MapStackScreen {...props} tracking={locationTracking}/>}
             </Tab.Screen>
+
             <Tab.Screen options={{
-            tabBarIcon: ({size, focused, color}) => {
+            tabBarIcon: () => {
                 return (
-                    <FontAwesome name="list" size={24} color={theme.dark ? 'white' : 'black'} />
-                )
+                        <FontAwesome name="list" size={24} color={theme.dark ? 'white' : 'black'} />
+                    )
             }, headerShown: false, title: "List"}} name={"ListStack"} component={ListStackScreen}/>
+
             <Tab.Screen options={{
-            tabBarIcon: ({size, focused, color}) => {
+            tabBarIcon: () => {
                 return (
                     <Ionicons name="person-circle-sharp" size={30} color={theme.dark ? 'white' : 'black'} />
                 )
@@ -76,6 +84,7 @@ export default function App() {
             }} name={"Profile"}>
                 {(props) => <ProfilePage {...props} setTheme={setTheme} setLocTracking={setLocationtracking}/>}
             </Tab.Screen>
+
         </Tab.Navigator>
       </NavigationContainer>
   );

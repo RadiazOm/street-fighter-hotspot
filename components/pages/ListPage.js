@@ -1,10 +1,7 @@
-import {ScrollView, StatusBar, Text, View} from "react-native";
-import ListItem from "../ListItem";
+import { View } from "react-native";
 import List from "../List";
 
-
-
-
+// component for list, kinda not needed
 const ListPage = ({navigation}) => {
 
     return(

@@ -1,19 +1,20 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {StatusBar, Text, View, StyleSheet, Image} from "react-native";
-import {AnimatedRegion, Circle, Marker, Animated} from "react-native-maps";
+import React, { useState, useEffect, useRef } from 'react';
+import { View, StyleSheet } from "react-native";
+import { AnimatedRegion, Circle, Marker } from "react-native-maps";
 import MapView from "react-native-maps";
 import * as Location from 'expo-location'
-import {Accuracy} from "expo-location";
+import { Accuracy } from "expo-location";
 import myLocationIcon from "../../assets/icons/myLocationIcon.png"
 import IconButton from "../IconButton.js";
-import {useTheme} from "@react-navigation/native";
-
+import { useTheme } from "@react-navigation/native";
 
 
 const MapPage = ({navigation, route, tracking}) => {
 
+    // State variable for the characterData we will fetch
     const [characterData, setCharacterData] = useState([])
 
+    // JSON object for light mode on the map
     const lightMapStyle = [
         {
             "elementType": "geometry",
@@ -230,6 +231,7 @@ const MapPage = ({navigation, route, tracking}) => {
         }
     ]
 
+    // JSON object for dark mode on the map
     const darkMapStyle = [
         {
             "elementType": "geometry",
@@ -392,23 +394,19 @@ const MapPage = ({navigation, route, tracking}) => {
         }
     ]
 
-    const { colors, dark } = useTheme()
+    // get current Theme
+    const { dark } = useTheme()
     const mapViewRef = useRef(null)
     const [location, setLocation] = useState(null);
-    const [radius, setRadius] = useState(10)
-    const [region, setRegion] = useState(new AnimatedRegion({
-        longitude: 4.484650,
-        latitude: 51.917381,
-        latitudeDelta: 0.0020,
-        longitudeDelta: 0.0020
-    }))
-    const [errorMsg, setErrorMsg] = useState(null);
 
+    // radius for how inaccurate our tracking is
+    const [radius, setRadius] = useState(10)
+
+    // Get location tracking permissions, and subscribe to callback
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted' || !tracking) {
-                setErrorMsg('Permission to access location was denied');
                 setLocation(null)
             } else {
                 await Location.watchPositionAsync({accuracy: Accuracy.Balanced}, (coords) => {
@@ -419,6 +417,8 @@ const MapPage = ({navigation, route, tracking}) => {
         })()
     }, [tracking]);
 
+
+    // Get characterData content from fetch
     useEffect(() => {
         (async () => {
 
@@ -427,14 +427,13 @@ const MapPage = ({navigation, route, tracking}) => {
                 const json = await response.json()
                 setCharacterData(json)
             } catch (e) {
-                setErrorMsg('Could not get character data')
+                alert('Could not get character data')
             }
-
-
         })();
     }, []);
 
 
+    // If we have come from a different stack. Animate to the given region (character location)
     if (route.params) {
         console.log(route.params)
         mapViewRef.current.animateToRegion({
@@ -445,18 +444,20 @@ const MapPage = ({navigation, route, tracking}) => {
         }, 1000)
     }
 
+    // mapview content
     return(
         <View style={styles.container}>
             <MapView ref={mapViewRef} style={styles.map}
                  initialRegion={{
+                     // Rotterdam cooridnates
                      longitude: 4.484650,
                      latitude: 51.917381,
                      latitudeDelta: 0.0020,
                      longitudeDelta: 0.0020
                  }}
-                 region={region}
                  customMapStyle={dark ? darkMapStyle : lightMapStyle}
             >
+                {/* for every character, create a marker for them */}
                 {characterData.map((character, index) => (
                     <Marker
                         key={index}
@@ -467,9 +468,12 @@ const MapPage = ({navigation, route, tracking}) => {
                         onCalloutPress={() => {navigation.navigate("Character", {name: character.character, image: character.image, location: {latitude: character.latitude, longitude: character.longitude}, description: character.description, theme: character.theme})}}
                     />
                 ))}
+                {/* our location using two circles, the first for the predicted location, the second for the inaccuracy */}
                 {location ? <Circle center={location} radius={radius} strokeColor={'rgba(0, 0, 255, 0.8)'} fillColor={'rgba(0, 0, 255, 0.1)'}/> : null}
                 {location ? <Circle center={location} radius={1} strokeColor={'rgba(255, 255, 255, 1)'} fillColor={'rgba(0, 100, 230, 1)'}/> : null}
             </MapView>
+
+            {/* button for going back to our location */}
             <IconButton style={{position: "absolute", bottom: 20, right: 20}} image={myLocationIcon} onPress={() => {
                 if (location) {
 

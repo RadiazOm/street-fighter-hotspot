@@ -1,12 +1,13 @@
-import {Image, Pressable, StatusBar, Text, View} from "react-native";
-import {useFonts} from "expo-font";
+import {Image, Pressable, Text, View} from "react-native";
 import {useTheme} from "@react-navigation/native";
 
 
 const CharacterPage = ({navigation, route}) => {
 
+    // get all the characters details from route params
     const {name, image, location, theme, description} = route.params
 
+    // get theme colors
     const { colors } = useTheme()
 
     return(
