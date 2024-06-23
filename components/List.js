@@ -21,6 +21,7 @@ import juriImage from "../assets/characterImg/juri.png"
 import deejayImage from "../assets/characterImg/deejay.png"
 import {useEffect, useState} from "react";
 import {useTheme} from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
@@ -36,16 +37,50 @@ const List = ({navigation}) => {
             try {
                 const response = await fetch("https://raw.githubusercontent.com/RadiazOm/street-fighter-hotspot/master/characterData.json")
                 const json = await response.json()
-                setCharacterData(json)
+                const favoritedList = await orderList(json)
+                setCharacterData(favoritedList)
             } catch (e) {
                 console.log('could not get character data')
             }
         })()
-    })
+    }, [])
+
+    useEffect(() => {
+        if (characterData.length !== 0) {
+            console.log("listening for characterdata changes: " + characterData[0].character)
+        }
+    }, [characterData]);
+
+    const orderList = async (list) => {
+        let mutatedArray = list
+        for (const character of mutatedArray) {
+            if (JSON.parse(await AsyncStorage.getItem(character.character))) {
+                mutatedArray.splice(mutatedArray.indexOf(character), 1)
+                mutatedArray.unshift(character)
+            }
+        }
+        return mutatedArray
+    }
+
+    const updateList = async () => {
+        const favoritedList = await orderList(characterData)
+        console.log(favoritedList[0].character)
+        setCharacterData([...favoritedList])
+    }
 
     return(
         <View style={{backgroundColor: colors.background}}>
-            <FlatList data={characterData} renderItem={({item}) => <ListItem character={item.character} location={{"longitude": item.longitude, "latitude": item.latitude}} image={item.image} theme={item.theme} description={item.description} navigation={navigation}/>}/>
+            <FlatList data={characterData} renderItem={({item}) =>
+                <ListItem
+                    character={item.character}
+                    location={{"longitude": item.longitude, "latitude": item.latitude}}
+                    image={item.image} theme={item.theme}
+                    description={item.description}
+                    navigation={navigation}
+                    updateList={updateList}
+                    characterData={characterData}
+                />}
+            />
         </View>
     )
 }
